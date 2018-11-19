@@ -30,80 +30,141 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style type="text/css">
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Calibri, sans-serif;
+      }
+      .background-wrap {
+        position: fixed;
+        z-index: -1000;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+      }
+
+      #video-bg-elem {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 100%;
+        min-width: 100%;
+      }
+      .content {
+        position: absolute;
+        width: 100%;
+        min-height: 100%;
+        z-index: 1000;
+        background-color: rgba(0,0,0,0.7);
+      }
+      .content h1 {
+        text-align: center;
+        font-size: 65px;
+        text-transform: uppercase;
+        font-weight: 300;
+        color: #fff;
+        padding-top: 15%;
+        margin-bottom: 10px;
+      }
+      .content p {
+        text-align: center;
+        font-size: 20px;
+        letter-spacing: 3px;
+        color: #aaa;
+      }
+      .login-box-body{
+        border-radius: 10px;
+        opacity: 0.7;
+      }
+
+    </style>
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>StartUp </b>Is Now</a>
-    </div>
+  <div class="background-wrap">
+    <video id="video-bg-elem" preload="auto" autoplay="true" loop="loop" muted="muted" position="inherit" >
+      <source src="{{url('././video/startup.mp4')}}" type="video/mp4">
+      Video not supported
+    </video>
+  </div>
+  <div class="login-box">
+      <div class="login-logo">
+          <a href="{{ url('/home') }}"><b>StartUp </b>Is Now</a>
+      </div>
 
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Reset your password</p>
+      <!-- /.login-logo -->
+      <div class="login-box-body">
+          <p class="login-box-msg">Reset your password</p>
 
-        <form method="post" action="{{ url('/password/reset') }}">
-            {!! csrf_field() !!}
+          <form method="post" action="{{ url('/password/reset') }}">
+              {!! csrf_field() !!}
 
-            <input type="hidden" name="token" value="{{ $token }}">
+              <input type="hidden" name="token" value="{{ $token }}">
 
-            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
-            </div>
+              <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                  <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  @if ($errors->has('email'))
+                      <span class="help-block">
+                      <strong>{{ $errors->first('email') }}</strong>
+                  </span>
+                  @endif
+              </div>
 
-            <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
+                  <input type="password" class="form-control" name="password" placeholder="Password">
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
-            </div>
+                  @if ($errors->has('password'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('password') }}</strong>
+                      </span>
+                  @endif
+              </div>
 
-            <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                  <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
-                @if ($errors->has('password_confirmation'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                    </span>
-                @endif
-            </div>
+                  @if ($errors->has('password_confirmation'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('password_confirmation') }}</strong>
+                      </span>
+                  @endif
+              </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary pull-right">
-                        <i class="fa fa-btn fa-refresh"></i>Reset Password
-                    </button>
-                </div>
-            </div>
-        </form>
+              <div class="row">
+                  <div class="col-md-12">
+                      <button type="submit" class="btn btn-primary pull-right">
+                          <i class="fa fa-btn fa-refresh"></i>Reset Password
+                      </button>
+                  </div>
+              </div>
+          </form>
 
-    </div>
-</div>
+      </div>
+  </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 
-<!-- AdminLTE App -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
+  <!-- AdminLTE App -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
+  <script>
+      $(function () {
+          $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+              increaseArea: '20%' // optional
+          });
+      });
+  </script>
+
 </body>
 </html>
